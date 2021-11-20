@@ -20,17 +20,19 @@ class ArticlesController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, Articles $article)
     {
         //POST /articles
-        $this->validate($request, [
-           'code' => 'required|alpha_dash|unique:articles,code',
+
+        $attributes = $request->validate([
+            'code' => 'required|alpha_dash|unique:articles,code',
             'title' => 'required|between:5,100',
             'description' => 'required|max:255',
-            'content' => 'required'
+            'content' => 'required',
+            'published' => 'boolean'
         ]);
 
-        Articles::create($request->all());
+        $article->create($attributes);
 
         return redirect('/');
     }
@@ -42,20 +44,33 @@ class ArticlesController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Articles $article)
     {
-        //GET /articles/{id}/edit
+        return view('articles.edit', compact('article'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Articles $article)
     {
         //PATCH /articles/{id}
+        $attributes = $request->validate([
+            'code' => 'required|alpha_dash|unique:articles,code',
+            'title' => 'required|between:5,100',
+            'description' => 'required|max:255',
+            'content' => 'required',
+            'published' => 'boolean'
+        ]);
+
+        $article->update($attributes);
+        return redirect('/');
     }
 
 
-    public function destroy($id)
+    public function destroy(Articles $article)
     {
         //DELETE /articles/{id}
+        $article->delete();
+
+        return redirect('/');
     }
 }
