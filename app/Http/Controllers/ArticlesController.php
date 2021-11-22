@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Validations\FormRequest;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
@@ -23,17 +24,8 @@ class ArticlesController extends Controller
     public function store(Request $request, Articles $article)
     {
         //POST /articles
-
-        $attributes = $request->validate([
-            'code' => 'required|alpha_dash|unique:articles,code',
-            'title' => 'required|between:5,100',
-            'description' => 'required|max:255',
-            'content' => 'required',
-            'published' => 'boolean'
-        ]);
-
-        $article->create($attributes);
-
+        $attributes = new FormRequest();
+        $article->create($attributes->articleValidate($request, $article));
         return redirect('/');
     }
 
@@ -53,15 +45,8 @@ class ArticlesController extends Controller
     public function update(Request $request, Articles $article)
     {
         //PATCH /articles/{id}
-        $attributes = $request->validate([
-            'code' => 'required|alpha_dash|unique:articles,code',
-            'title' => 'required|between:5,100',
-            'description' => 'required|max:255',
-            'content' => 'required',
-            'published' => 'boolean'
-        ]);
-
-        $article->update($attributes);
+        $attributes = new FormRequest();
+        $article->update($attributes->articleValidate($request, $article));
         return redirect('/');
     }
 

@@ -12,26 +12,8 @@
             @csrf
             @method('PATCH')
 
-            <div class="mb-3">
-                <label for="inputCode" class="form-label">Идентификатор статьи</label>
-                <input name="code" type="text" class="form-control" id="inputCode" value="{{old('code', $article->code)}}">
-            </div>
-            <div class="mb-3">
-                <label for="inputTitle" class="form-label">Заголовок статьи</label>
-                <input name="title" type="text" class="form-control" id="inputTitle" value="{{old('title', $article->title)}}">
-            </div>
-            <div class="mb-3">
-                <label for="inputDescr" class="form-label">Краткое описание статьи</label>
-                <textarea name="description" class="form-control" id="inputDescr">{{old('description', $article->description)}}</textarea>
-            </div>
-            <div class="mb-3">
-                <label for="inputContent" class="form-label">Детальное описание статьи</label>
-                <textarea name="content" class="form-control" id="inputContent">{{old('content', $article->content)}}</textarea>
-            </div>
-            <div class="mb-3 form-check">
-                <input name="published" type="checkbox" class="form-check-input" id="inputPublished" value="1">
-                <label class="form-check-label" for="inputPublished">Опубликовано</label>
-            </div>
+            @include('layout.articleForm')
+
             <button name="send" type="submit" class="btn btn-primary">Изменить</button>
         </form>
 
