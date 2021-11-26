@@ -10,8 +10,12 @@
 
 <body>
     @include('layout.header')
-
-    @yield('content')
+    <main role="main" class="flex">
+        <div class="row">
+            @yield('content')
+        </div>
+        @include('layout.sidebar')
+    </main>
 
     @include('layout.footer')
 </body>

@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Contacts;
+use App\Models\Contact;
 use Illuminate\Http\Request;
 
 class ContactsController extends Controller
@@ -19,14 +19,14 @@ class ContactsController extends Controller
            'message' => 'required'
         ]);
 
-        Contacts::create(\request()->all());
+        Contact::create(\request()->all());
 
-//        Contacts::create([
+//        Contact::create([
 //            'email' => request('email'),
 //            'message' => request('message')
 //        ]);
 
-//        $contacts = new Contacts();
+//        $contacts = new Contact();
 //        $contacts->email = \request('email');
 //        $contacts->message = \request('message');
 //

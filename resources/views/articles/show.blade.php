@@ -11,6 +11,8 @@
         <h2 class="blog-post-title">{{$article->title}}</h2>
         <p class="blog-post-meta">{{$article->created_at->format('d.m.Y H:i:s')}}</p>
 
+        @include('layout.tags', ['tags' => $article->tags])
+
         {{$article->content}}
     </div>
     <a href="/">Вернуться на главную страницу</a>

@@ -6,7 +6,7 @@ use App\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 
 
-class Contacts extends Model
+class Contact extends Model
 {
     use HasFactory;
 

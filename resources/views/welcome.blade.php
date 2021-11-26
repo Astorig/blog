@@ -11,6 +11,8 @@
             <h2 class="blog-post-title"><a href="/articles/{{$article->code}}">{{$article->title}}</a></h2>
             <p class="blog-post-meta">{{$article->created_at->format('d.m.Y H:i:s')}}</p>
 
+            @include('layout.tags', ['tags' => $article->tags])
+
             {{$article->description}}
         </div>
 
