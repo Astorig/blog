@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Articles;
+use App\Validations\FormRequest;
 use Illuminate\Http\Request;
 
 class ArticlesController extends Controller
@@ -20,18 +21,11 @@ class ArticlesController extends Controller
     }
 
 
-    public function store(Request $request)
+    public function store(Request $request, Articles $article)
     {
         //POST /articles
-        $this->validate($request, [
-           'code' => 'required|alpha_dash|unique:articles,code',
-            'title' => 'required|between:5,100',
-            'description' => 'required|max:255',
-            'content' => 'required'
-        ]);
-
-        Articles::create($request->all());
-
+        $attributes = new FormRequest();
+        $article->create($attributes->articleValidate($request, $article));
         return redirect('/');
     }
 
@@ -42,20 +36,26 @@ class ArticlesController extends Controller
     }
 
 
-    public function edit($id)
+    public function edit(Articles $article)
     {
-        //GET /articles/{id}/edit
+        return view('articles.edit', compact('article'));
     }
 
 
-    public function update(Request $request, $id)
+    public function update(Request $request, Articles $article)
     {
         //PATCH /articles/{id}
+        $attributes = new FormRequest();
+        $article->update($attributes->articleValidate($request, $article));
+        return redirect('/');
     }
 
 
-    public function destroy($id)
+    public function destroy(Articles $article)
     {
         //DELETE /articles/{id}
+        $article->delete();
+
+        return redirect('/');
     }
 }
