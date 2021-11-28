@@ -8,20 +8,9 @@ use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\TagsController;
 
-/**
- * GET /articles (index)
- * GET /articles/create (create)
- * GET /articles/1 (show)
- * POST /articles (store)
- * GET /articles/1/edit (edit)
- * PATCH /articles/1 (update)
- * DELETE /articles/1 (destroy)
-*/
-
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/articles/tags/{tag}', [TagsController::class, 'index']);
-//Route::resource('/articles', 'ArticlesController');
 Route::get('/articles', [ArticlesController::class, 'index'])->name('articles');
 Route::get('/articles/create', [ArticlesController::class, 'create'])->name('articles.create');
 Route::get('/articles/{article:code}', [ArticlesController::class, 'show'])->name('articles.show');

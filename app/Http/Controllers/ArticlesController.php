@@ -13,19 +13,18 @@ class ArticlesController extends Controller
 
     public function index()
     {
-        return view('articles.index'); //GET /articles
+        return view('articles.index');
     }
 
 
     public function create()
     {
-        return view('articles.create'); //GET /articles/create
+        return view('articles.create');
     }
 
 
     public function store(Request $request, Article $article, FormRequest $attributes, TagsSynchronizer $tagsSynchronizer)
     {
-        //POST /articles
         $tags = collect(explode(',', $request['tags']));
         $tagsSynchronizer->sync($tags, $article->create($attributes->articleValidate($request, $article)));
         return redirect('/');
@@ -46,7 +45,6 @@ class ArticlesController extends Controller
 
     public function update(Request $request, Article $article, TagsSynchronizer $tagsSynchronizer)
     {
-        //PATCH /articles/{id}
         $attributes = new FormRequest();
         $article->update($attributes->articleValidate($request, $article));
 
@@ -60,7 +58,6 @@ class ArticlesController extends Controller
 
     public function destroy(Article $article)
     {
-        //DELETE /articles/{id}
         $article->delete();
 
         return redirect('/');

@@ -21,17 +21,6 @@ class ContactsController extends Controller
 
         Contact::create(\request()->all());
 
-//        Contact::create([
-//            'email' => request('email'),
-//            'message' => request('message')
-//        ]);
-
-//        $contacts = new Contact();
-//        $contacts->email = \request('email');
-//        $contacts->message = \request('message');
-//
-//        $contacts->save();
-
         return redirect('/contacts');
     }
 }
