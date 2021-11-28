@@ -16,6 +16,7 @@ class CreateArticlesTable extends Migration
             $table->text('content');
             $table->boolean('published')->default(false);
             $table->timestamps();
+            $table->foreignId('user_id')->constrained()->cascadeOnDelete();
         });
     }
 

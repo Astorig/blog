@@ -14,7 +14,9 @@
         <div class="row">
             @yield('content')
         </div>
-        @include('layout.sidebar')
+        @section('sidebar')
+            @include('layout.sidebar')
+        @show
     </main>
 
     @include('layout.footer')

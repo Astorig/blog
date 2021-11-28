@@ -8,7 +8,7 @@ class FormRequest
 {
     public function articleValidate($request, $article)
     {
-        return $request->validate([
+        $result = $request->validate([
             'code' => [
                 'required',
                 'alpha_dash',
@@ -19,5 +19,7 @@ class FormRequest
             'content' => 'required',
             'published' => 'boolean'
         ]);
+        $result['user_id'] = auth()->id();
+        return $result;
     }
 }

@@ -5,7 +5,9 @@
         <h3 class="pb-3 mb-4 font-italic border-bottom">
             Статья
         </h3>
-        <a href="/articles/{{$article->code}}/edit">Изменить</a>
+        @can('update', $article)
+            <a href="/articles/{{$article->code}}/edit">Изменить</a>
+        @endcan
     </div>
     <div class="blog-post">
         <h2 class="blog-post-title">{{$article->title}}</h2>

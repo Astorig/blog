@@ -22,3 +22,6 @@ Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts');
 Route::post('/contacts', [ContactsController::class, 'store'])->name('contacts.add');
 Route::get('/admin/feedback', [AdminController::class, 'index'])->name('feedback');
 
+
+Auth::routes();
+
