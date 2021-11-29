@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Events\ArticleCreated;
 use App\Models\Article;
 use App\Models\Tag;
 use App\Services\TagsSynchronizer;
@@ -33,6 +34,7 @@ class ArticlesController extends Controller
     {
         $tags = collect(explode(',', $request['tags']));
         $tagsSynchronizer->sync($tags, $article->create($attributes->articleValidate($request, $article)));
+//        event(new ArticleCreated($article));
         return redirect('/');
     }
 
