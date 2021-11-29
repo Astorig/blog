@@ -22,6 +22,12 @@
         {{old('content', $article->content ?? '')}}
     </textarea>
 </div>
+<div class="mb-3">
+    <label for="inputTags" class="form-label">Тэги</label>
+    <input name="tags" type="text" class="form-control" id="inputTags"
+           placeholder="Введите тэги"
+           value="{{old('tags', isset($article->tags) ? $article->tags->pluck('name')->implode(',') : '')}}">
+</div>
 <div class="mb-3 form-check">
     <input name="published" type="checkbox" class="form-check-input" id="inputPublished" value="1">
     <label class="form-check-label" for="inputPublished">Опубликовано</label>
