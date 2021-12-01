@@ -28,7 +28,9 @@
            placeholder="Введите тэги"
            value="{{old('tags', isset($article->tags) ? $article->tags->pluck('name')->implode(',') : '')}}">
 </div>
-<div class="mb-3 form-check">
-    <input name="published" type="checkbox" class="form-check-input" id="inputPublished" value="1">
-    <label class="form-check-label" for="inputPublished">Опубликовано</label>
-</div>
+@admin(Auth::user()->roles)
+        <div class="mb-3 form-check">
+            <input name="published" type="checkbox" class="form-check-input" id="inputPublished" value="{{ $article->isPublished() ? 0 : 1 }}">
+            <label class="form-check-label" for="inputPublished">{{ $article->isPublished() ? 'Снять с публикации' : 'Опубликовать' }}</label>
+        </div>
+@endadmin

@@ -22,4 +22,14 @@ class Article extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    public function isPublished()
+    {
+        return (bool) $this->published;
+    }
+
+    public function isNotPublished()
+    {
+        return ! $this->isPublished();
+    }
 }

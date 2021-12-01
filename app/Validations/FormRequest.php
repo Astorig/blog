@@ -19,6 +19,7 @@ class FormRequest
             'content' => 'required',
             'published' => 'boolean'
         ]);
+
         $result['user_id'] = auth()->id();
         return $result;
     }
