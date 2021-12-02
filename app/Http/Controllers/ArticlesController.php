@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\Tag;
+use App\Models\User;
 use App\Services\TagsSynchronizer;
 use App\Validations\FormRequest;
 use Illuminate\Http\Request;
@@ -14,7 +14,7 @@ class ArticlesController extends Controller
     public function __construct()
     {
         $this->middleware('auth')->except(['index', 'show']);
-        $this->middleware('can:update,article')->except(['index', 'show']);
+        $this->middleware('can:update,article')->only('edit', 'update', 'destroy');
     }
 
     public function index()
@@ -29,10 +29,14 @@ class ArticlesController extends Controller
     }
 
 
-    public function store(Request $request, Article $article, FormRequest $attributes, TagsSynchronizer $tagsSynchronizer)
+    public function store(Request $request, Article $article, FormRequest $attributes, TagsSynchronizer $tagsSynchronizer, User $user)
     {
         $tags = collect(explode(',', $request['tags']));
-        $tagsSynchronizer->sync($tags, $article->create($attributes->articleValidate($request, $article)));
+
+        $articleResult = $article->create($attributes->articleValidate($request, $article));
+
+        $tagsSynchronizer->sync($tags, $articleResult);
+
         return redirect('/');
     }
 
@@ -49,9 +53,8 @@ class ArticlesController extends Controller
     }
 
 
-    public function update(Request $request, Article $article, TagsSynchronizer $tagsSynchronizer)
+    public function update(Request $request, Article $article,FormRequest $attributes, TagsSynchronizer $tagsSynchronizer)
     {
-        $attributes = new FormRequest();
         $article->update($attributes->articleValidate($request, $article));
 
         $tags = collect(explode(',', $request['tags']));

@@ -12,14 +12,14 @@ Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
 Route::get('/articles/tags/{tag}', [TagsController::class, 'index']);
 Route::get('/articles', [ArticlesController::class, 'index'])->name('articles');
-Route::get('/articles/create', [ArticlesController::class, 'create'])->name('articles.create');
-Route::get('/articles/{article:code}', [ArticlesController::class, 'show'])->name('articles.show');
-Route::post('/articles', [ArticlesController::class, 'store'])->name('articles.add');
-Route::get('/articles/{article:code}/edit', [ArticlesController::class, 'edit'])->name('articles.edit');
-Route::patch('/articles/{article:code}', [ArticlesController::class, 'update'])->name('articles.update');
-Route::delete('/articles/{article:code}', [ArticlesController::class, 'destroy'])->name('articles.delete');
+Route::get('/articles/create', [ArticlesController::class, 'create'])->name('article.create');
+Route::get('/articles/{article:code}', [ArticlesController::class, 'show'])->name('article.show');
+Route::post('/articles', [ArticlesController::class, 'store'])->name('article.store');
+Route::get('/articles/{article:code}/edit', [ArticlesController::class, 'edit'])->name('article.edit');
+Route::patch('/articles/{article:code}', [ArticlesController::class, 'update'])->name('article.update');
+Route::delete('/articles/{article:code}', [ArticlesController::class, 'destroy'])->name('article.destroy');
 Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts');
-Route::post('/contacts', [ContactsController::class, 'store'])->name('contacts.add');
+Route::post('/contacts', [ContactsController::class, 'store'])->name('contact.add');
 Route::get('/admin/feedback', [AdminController::class, 'index'])->name('feedback');
 
 
