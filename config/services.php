@@ -30,4 +30,10 @@ return [
         'region' => env('AWS_DEFAULT_REGION', 'us-east-1'),
     ],
 
+    'pushall' => [
+        'api' => [
+            'key' => env('PUSHALL_PRIVATE_KEY'),
+            'id' => env('PUSHALL_PRIVATE_ID'),
+        ],
+    ],
 ];
