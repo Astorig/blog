@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\User;
-use App\Notifications\ArticleChangeCompleted;
 use App\Services\TagsSynchronizer;
 use App\Validations\FormRequest;
 use Illuminate\Http\Request;
@@ -38,8 +37,6 @@ class ArticlesController extends Controller
 
         $tagsSynchronizer->sync($tags, $articleResult);
 
-        sendingAnArticleChangeNotification($articleResult, 'create');
-
         return redirect('/');
     }
 
@@ -64,8 +61,6 @@ class ArticlesController extends Controller
 
         $tagsSynchronizer->sync($tags, $article);
 
-        sendingAnArticleChangeNotification($article, 'update');
-
         return redirect('/');
     }
 
@@ -73,8 +68,6 @@ class ArticlesController extends Controller
     public function destroy(Article $article)
     {
         $article->delete();
-
-        sendingAnArticleChangeNotification($article, 'destroy');
 
         return redirect('/');
     }
