@@ -17,5 +17,12 @@
 
         {{$article->content}}
     </div>
+    <hr>
+    @forelse($article->history as $item)
+        <p>{{ $item->email }} - {{ $item->pivot->created_at->diffForHumans() }} - {{ $item->pivot->before }} - {{ $item->pivot->after }}</p>
+    @empty
+        <p>Нет истории изменений</p>
+    @endforelse
+
     <a href="/">Вернуться на главную страницу</a>
 @endsection
