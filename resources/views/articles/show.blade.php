@@ -23,6 +23,22 @@
     @empty
         <p>Нет истории изменений</p>
     @endforelse
+    <hr>
+
+    @auth()
+    @include('layout.commentForm')
+    @endauth
+
+    @forelse($article->comments()->latest()->get() as $item)
+        <div>
+            <p>Автор: {{ $item->user->email }}</p>
+            <p>Дата создания: {{ $item->created_at }}</p>
+            <p>Комментарий: {{ $item->body }}</p>
+            <hr>
+        </div>
+    @empty
+        <p>Нет комментариев</p>
+    @endforelse
 
     <a href="/">Вернуться на главную страницу</a>
 @endsection

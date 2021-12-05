@@ -22,4 +22,14 @@ class FormRequest
         $result['user_id'] = auth()->id();
         return $result;
     }
+
+    public function commentValidate($request, $article)
+    {
+        $result = $request->validate([
+           'body' => 'required|between:5,250'
+        ]);
+        $result['user_id'] = auth()->id();
+        $result['article_id'] = $article->id;
+        return $result;
+    }
 }

@@ -50,4 +50,9 @@ class Article extends Model
         return $this->belongsToMany(User::class, 'article_histories')
             ->withPivot(['before', 'after'])->withTimestamps();
     }
+
+    public function comments()
+    {
+        return $this->hasMany(Comment::class);
+    }
 }

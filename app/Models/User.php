@@ -51,4 +51,9 @@ class User extends Authenticatable
     {
         return config('mail.for.address');
     }
+
+    public function comments()
+    {
+        return $this->belongsToMany(Comment::class);
+    }
 }
