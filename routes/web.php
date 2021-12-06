@@ -28,6 +28,7 @@ Route::get('/admin', [AdminController::class, 'index'])->name('admin');
 Route::get('/admin/feedback', [AdminController::class, 'feedback'])->name('admin.feedback');
 Route::get('/admin/articles', [AdminController::class, 'articles'])->name('admin.articles');
 Route::get('/admin/articles/{article:code}', [AdminController::class, 'show'])->name('admin.articles.show');
+Route::get('/admin/news', [AdminController::class, 'news'])->name('admin.news');
 
 Auth::routes();
 

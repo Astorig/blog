@@ -15,6 +15,6 @@
 
             {{$article->description}}
         </div>
-
+        {{ $articles->links() }}
     @endforeach
 @endsection

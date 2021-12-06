@@ -23,4 +23,14 @@ class FormRequest
         $result['user_id'] = auth()->id();
         return $result;
     }
+
+    public function newsValidate($request)
+    {
+        $result = $request->validate([
+           'title' => 'required|between:5,100',
+           'description' => 'required|max:255',
+           'body' => 'required'
+        ]);
+        return $result;
+    }
 }

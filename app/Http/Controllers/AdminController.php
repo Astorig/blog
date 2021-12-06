@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Article;
 use App\Models\Contact;
+use App\Models\News;
 
 class AdminController extends Controller
 {
@@ -30,7 +31,13 @@ class AdminController extends Controller
 
     public function articles()
     {
-        $articles = Article::with('tags')->latest()->get();
+        $articles = Article::with('tags')->latest()->simplePaginate(20);
         return view('admin.articles', compact('articles'));
+    }
+
+    public function news(News $news)
+    {
+        $news = $news->latest()->simplePaginate(20);
+        return view('admin.news', compact('news'));
     }
 }
