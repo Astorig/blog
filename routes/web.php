@@ -7,6 +7,7 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\WelcomeController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\TagsController;
+use App\Http\Controllers\NewsController;
 
 Route::get('/', [WelcomeController::class, 'index'])->name('welcome');
 Route::get('/about', [AboutController::class, 'index'])->name('about');
@@ -22,6 +23,7 @@ Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts');
 Route::post('/contacts', [ContactsController::class, 'store'])->name('contact.add');
 Route::get('/admin/feedback', [AdminController::class, 'index'])->name('feedback');
 
+Route::resource('/news', NewsController::class);
 
 Auth::routes();
 
