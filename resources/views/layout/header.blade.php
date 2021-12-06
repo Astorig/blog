@@ -39,6 +39,10 @@
         <a class="p-2 text-muted" href="/about">О нас</a>
         <a class="p-2 text-muted" href="/contacts">Контакты</a>
         <a class="p-2 text-muted" href="/articles/create">Создать статью</a>
-        <a class="p-2 text-muted" href="/admin/feedback">Админ. раздел</a>
+        @auth()
+            @admin(Auth::user()->roles)
+            <a class="p-2 text-muted" href="/admin">Админ. раздел</a>
+            @endadmin
+        @endauth
     </nav>
 </div>
