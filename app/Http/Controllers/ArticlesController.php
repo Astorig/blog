@@ -38,7 +38,7 @@ class ArticlesController extends Controller
 
         $tagsSynchronizer->sync($tags, $articleResult);
 
-        $pushall->send($articleResult->title);
+        $pushall->send($articleResult);
 
         return redirect('/');
     }

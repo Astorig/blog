@@ -14,13 +14,13 @@ class Pushall
         $this->id = $id;
     }
 
-    public function send($title)
+    public function send($article)
     {
         $data = [
             'type' => 'self',
             'id' => $this->id,
             'key' => $this->apiKey,
-            'text' => $title,
+            'text' => $article->title,
             'title' => 'Новая статья!'
         ];
 
