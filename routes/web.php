@@ -21,9 +21,12 @@ Route::patch('/articles/{article:code}', [ArticlesController::class, 'update'])-
 Route::delete('/articles/{article:code}', [ArticlesController::class, 'destroy'])->name('article.destroy');
 Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts');
 Route::post('/contacts', [ContactsController::class, 'store'])->name('contact.add');
-Route::get('/admin/feedback', [AdminController::class, 'index'])->name('feedback');
 Route::post('/articles/{article:code}/comments', [CommentsController::class, 'store'])->name('comment.store');
 
+Route::get('/admin', [AdminController::class, 'index'])->name('admin');
+Route::get('/admin/feedback', [AdminController::class, 'feedback'])->name('admin.feedback');
+Route::get('/admin/articles', [AdminController::class, 'articles'])->name('admin.articles');
+Route::get('/admin/articles/{article:code}', [AdminController::class, 'show'])->name('admin.articles.show');
 
 Auth::routes();
 

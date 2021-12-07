@@ -7,9 +7,9 @@ use Illuminate\Http\Request;
 
 class WelcomeController extends Controller
 {
-    public function index()
+    public function index(Article $article)
     {
-        $articles = Article::with('tags')->latest()->get();
+        $articles = $article->with('tags')->latest()->get();
         return view('welcome', compact('articles'));
     }
 }

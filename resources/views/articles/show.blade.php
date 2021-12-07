@@ -5,9 +5,13 @@
         <h3 class="pb-3 mb-4 font-italic border-bottom">
             Статья
         </h3>
-        @can('update', $article)
-            <a href="/articles/{{$article->code}}/edit">Изменить</a>
-        @endcan
+        @admin(Auth::user()->roles)
+        <a class="p-2 text-muted" href="/admin">Админ. раздел</a>
+        @else
+            @can('update', $article)
+                <a href="/articles/{{$article->code}}/edit">Изменить</a>
+            @endcan
+        @endadmin
     </div>
     <div class="blog-post">
         <h2 class="blog-post-title">{{$article->title}}</h2>

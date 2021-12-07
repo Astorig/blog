@@ -55,4 +55,14 @@ class Article extends Model
     {
         return $this->hasMany(Comment::class);
     }
+
+    public function isPublished()
+    {
+        return (bool) $this->published;
+    }
+
+    public function isNotPublished()
+    {
+        return ! $this->isPublished();
+    }
 }
