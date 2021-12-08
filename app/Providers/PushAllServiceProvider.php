@@ -4,6 +4,7 @@ namespace App\Providers;
 
 use Illuminate\Support\ServiceProvider;
 use App\Services\Pushall;
+
 class PushAllServiceProvider extends ServiceProvider
 {
     /**
