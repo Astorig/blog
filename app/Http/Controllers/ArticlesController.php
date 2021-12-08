@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\Article;
-use App\Models\User;
 use App\Services\TagsSynchronizer;
 use App\Validations\FormRequest;
 use Illuminate\Http\Request;
@@ -29,7 +28,7 @@ class ArticlesController extends Controller
     }
 
 
-    public function store(Request $request, Article $article, FormRequest $attributes, TagsSynchronizer $tagsSynchronizer, User $user)
+    public function store(Request $request, Article $article, FormRequest $attributes, TagsSynchronizer $tagsSynchronizer)
     {
         $tags = collect(explode(',', $request['tags']));
 

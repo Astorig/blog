@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\ArticleCreated;
 use App\Notifications\ArticleChangeCompleted;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SendArticleCreatedNotification
 {

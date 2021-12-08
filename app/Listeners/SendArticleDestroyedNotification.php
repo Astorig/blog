@@ -4,8 +4,6 @@ namespace App\Listeners;
 
 use App\Events\ArticleDestroyed;
 use App\Notifications\ArticleChangeCompleted;
-use Illuminate\Contracts\Queue\ShouldQueue;
-use Illuminate\Queue\InteractsWithQueue;
 
 class SendArticleDestroyedNotification
 {
