@@ -24,6 +24,15 @@ class FormRequest
         return $result;
     }
 
+    public function newsValidate($request)
+    {
+        $result = $request->validate([
+            'title' => 'required|between:5,100',
+            'description' => 'required|max:255',
+            'body' => 'required'
+        ]);
+    }
+
     public function commentValidate($request, $article)
     {
         $result = $request->validate([
