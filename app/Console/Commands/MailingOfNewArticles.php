@@ -44,5 +44,6 @@ class MailingOfNewArticles extends Command
         $filtered = Article::all()->where('created_at', '>=', date("Y-m-d H:i:s", $startDate));
         $users = User::all();
         $users->map->notify(new MailingOfNews($filtered));
+        return Command::SUCCESS;
     }
 }
