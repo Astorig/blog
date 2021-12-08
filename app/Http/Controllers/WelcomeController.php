@@ -6,9 +6,10 @@ use App\Models\Article;
 
 class WelcomeController extends Controller
 {
-    public function index()
+    public function index(Article $article)
     {
-        $articles = Article::with('tags')->latest()->get();
-        return view('welcome', compact('articles'));
+        $articlesIsPublished = $article->with('tags')->latest()->where('published', '1')->simplePaginate(10);
+        $articlesIsNotPublished = $article->with('tags')->latest()->where('published', '0')->get();
+        return view('welcome', compact('articlesIsPublished', 'articlesIsNotPublished'));
     }
 }

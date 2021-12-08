@@ -50,4 +50,19 @@ class User extends Authenticatable
     {
         return config('mail.for.address');
     }
+
+    public function comments()
+    {
+        return $this->belongsToMany(Comment::class);
+    }
+
+    public function roles()
+    {
+        return $this->belongsToMany(Role::class);
+    }
+
+    public function isAdmin()
+    {
+        return ! empty($this->roles->firstWhere('id', '==', 1));
+    }
 }

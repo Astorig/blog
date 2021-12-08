@@ -19,7 +19,27 @@ class FormRequest
             'content' => 'required',
             'published' => 'boolean'
         ]);
+
         $result['user_id'] = auth()->id();
+        return $result;
+    }
+
+    public function newsValidate($request)
+    {
+        $result = $request->validate([
+            'title' => 'required|between:5,100',
+            'description' => 'required|max:255',
+            'body' => 'required'
+        ]);
+    }
+
+    public function commentValidate($request, $article)
+    {
+        $result = $request->validate([
+           'body' => 'required|between:5,250'
+        ]);
+        $result['user_id'] = auth()->id();
+        $result['article_id'] = $article->id;
         return $result;
     }
 }
