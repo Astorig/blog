@@ -8,6 +8,8 @@
         <div class="blog-post">
             <h3 class="blog-post-title"><a href="/news/{{$oneNews->id}}">{{$oneNews->title}}</a></h3>
             <p class="blog-post-meta">{{$oneNews->created_at->format('d.m.Y H:i:s')}}</p>
+
+            @include('layout.tags', ['tags' => $oneNews->tags])
             {{$oneNews->description}}
         </div>
     @empty
