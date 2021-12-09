@@ -30,9 +30,11 @@
     <hr>
 
     @auth()
-    @include('layout.commentForm')
+        <form action="/articles/{{$article->code}}/comments/" method="post">
+            @csrf
+        @include('layout.commentForm')
+        </form>
     @endauth
-
     @forelse($article->comments()->latest()->get() as $item)
         <div>
             <p>Автор: {{ $item->user->email }}</p>

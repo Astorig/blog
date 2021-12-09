@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\News;
+use App\Services\TagsSynchronizer;
 use App\Validations\FormRequest;
 use Illuminate\Http\Request;
 
@@ -25,9 +26,13 @@ class NewsController extends Controller
         return view('news.create');
     }
 
-    public function store(Request $request, FormRequest $attributes, News $news)
+    public function store(Request $request, FormRequest $attributes, News $news, TagsSynchronizer $tagsSynchronizer)
     {
-        $news->create($attributes->newsValidate($request));
+        $tags = collect(explode(',', $request['tags']));
+
+        $newsResult = $news->create($attributes->newsValidate($request));
+
+        $tagsSynchronizer->sync($tags, $newsResult);
 
         return redirect()->route('news.index');
     }
@@ -42,9 +47,13 @@ class NewsController extends Controller
         return view('news.edit', compact('news'));
     }
 
-    public function update(Request $request, FormRequest $attributes, News $news)
+    public function update(Request $request, FormRequest $attributes, News $news, TagsSynchronizer $tagsSynchronizer)
     {
         $news->update($attributes->newsValidate($request));
+
+        $tags = collect(explode(',', $request['tags']));
+
+        $tagsSynchronizer->sync($tags, $news);
         return redirect()->route('admin.news');
     }
 

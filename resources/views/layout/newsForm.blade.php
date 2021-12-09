@@ -16,3 +16,9 @@
         {{old('body', $news->body ?? '')}}
     </textarea>
 </div>
+<div class="mb-3">
+    <label for="inputTags" class="form-label">Тэги</label>
+    <input name="tags" type="text" class="form-control" id="inputTags"
+           placeholder="Введите тэги"
+           value="{{old('tags', isset($news->tags) ? $news->tags->pluck('name')->implode(',') : '')}}">
+</div>

@@ -10,10 +10,10 @@ class TagsSynchronizer
 {
     public function sync(Collection $tags, Model $model)
     {
-        $articleTags = $model->tags->keyBy('name');
+        $modelTags = $model->tags->keyBy('name');
         $tagsRequest = $tags->keyBy(function ($item) { return $item; });
-        $syncIds = $articleTags->intersectByKeys($tagsRequest)->pluck('id')->toArray();
-        $tagsToAttach = $tagsRequest->diffKeys($articleTags);
+        $syncIds = $modelTags->intersectByKeys($tagsRequest)->pluck('id')->toArray();
+        $tagsToAttach = $tagsRequest->diffKeys($modelTags);
 
         foreach ($tagsToAttach as $tag) {
             $tag = Tag::firstOrCreate(['name' => $tag]);

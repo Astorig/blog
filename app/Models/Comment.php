@@ -11,9 +11,9 @@ class Comment extends Model
 
     protected $guarded = [];
 
-    public function article()
+    public function commentable()
     {
-        return $this->belongsTo(Article::class);
+        return $this->morphTo();
     }
 
     public function user()

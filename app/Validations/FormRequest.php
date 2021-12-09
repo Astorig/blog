@@ -31,15 +31,18 @@ class FormRequest
             'description' => 'required|max:255',
             'body' => 'required'
         ]);
+        return $result;
     }
 
-    public function commentValidate($request, $article)
+    public function commentValidate($request, $publication)
     {
         $result = $request->validate([
            'body' => 'required|between:5,250'
         ]);
+        $result['commentable_type'] = get_class($publication);
+        $result['commentable_id'] = $publication->id;
         $result['user_id'] = auth()->id();
-        $result['article_id'] = $article->id;
+
         return $result;
     }
 }

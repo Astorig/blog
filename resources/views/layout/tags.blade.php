@@ -5,7 +5,7 @@ $tags = $tags ?? collect();
 @if($tags->isNotEmpty())
     <div>
         @foreach($tags as $tag)
-            <a href="/articles/tags/{{ $tag->getRouteKey() }}" class="badge rounded-pill bg-secondary">{{ $tag->name }}</a>
+            <a href="/tags/{{ $tag->getRouteKey() }}" class="badge rounded-pill bg-secondary">{{ $tag->name }}</a>
         @endforeach
     </div>
 @endif

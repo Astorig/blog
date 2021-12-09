@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\Article;
 use App\Models\Contact;
 use App\Models\News;
+use App\Services\PortalStatistics;
+use Illuminate\Support\Facades\DB;
 
 class AdminController extends Controller
 {
@@ -39,5 +41,12 @@ class AdminController extends Controller
     {
         $news = $news->latest()->simplePaginate(20);
         return view('admin.news', compact('news'));
+    }
+
+    public function statistics(PortalStatistics $statistics)
+    {
+
+        $resultStatistics = $statistics->resultPortalStatistics()->toArray();
+        return view('admin.statistics', compact('resultStatistics'));
     }
 }

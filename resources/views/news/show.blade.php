@@ -13,4 +13,21 @@
     @else
         <a href="/news">Вернуться на страницу новостей</a>
     @endadmin
+
+    @auth()
+        <form action="/news/{{$news->id}}/comments/" method="post">
+            @csrf
+            @include('layout.commentForm')
+        </form>
+    @endauth
+    @forelse($news->comments()->latest()->get() as $item)
+        <div>
+            <p>Автор: {{ $item->user->email }}</p>
+            <p>Дата создания: {{ $item->created_at }}</p>
+            <p>Комментарий: {{ $item->body }}</p>
+            <hr>
+        </div>
+    @empty
+        <p>Нет комментариев</p>
+    @endforelse
 @endsection
