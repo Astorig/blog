@@ -10,6 +10,7 @@ class TagsController extends Controller
     {
         $articlesIsPublished = $tag->articles()->with('tags')->where('published', '1')->simplePaginate(10);
         $news = $tag->news()->with('tags')->get();
+
         return view('tagsShow', compact('articlesIsPublished', 'news'));
     }
 }
