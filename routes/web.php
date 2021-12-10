@@ -20,9 +20,12 @@ Route::post('/articles', [ArticlesController::class, 'store'])->name('article.st
 Route::get('/articles/{article:code}/edit', [ArticlesController::class, 'edit'])->name('article.edit');
 Route::patch('/articles/{article:code}', [ArticlesController::class, 'update'])->name('article.update');
 Route::delete('/articles/{article:code}', [ArticlesController::class, 'destroy'])->name('article.destroy');
+
 Route::get('/contacts', [ContactsController::class, 'index'])->name('contacts');
 Route::post('/contacts', [ContactsController::class, 'store'])->name('contact.add');
+
 Route::resource('/news', NewsController::class);
+
 Route::post('/articles/{article:code}/comments', [CommentsController::class, 'article'])->name('comment.article');
 Route::post('/news/{news}/comments', [CommentsController::class, 'news'])->name('comment.news');
 
@@ -31,7 +34,11 @@ Route::get('/admin/feedback', [AdminController::class, 'feedback'])->name('admin
 Route::get('/admin/articles', [AdminController::class, 'articles'])->name('admin.articles');
 Route::get('/admin/articles/{article:code}', [AdminController::class, 'show'])->name('admin.articles.show');
 Route::get('/admin/news', [AdminController::class, 'news'])->name('admin.news');
-Route::get('/admin/statistics', [AdminController::class, 'statistics'])->name('admin.statistics');
+
+Route::view('/admin/reports', 'admin.reports.index')->name('admin.reports.index');
+Route::get('/admin/reports/statistics', [AdminController::class, 'statistics'])->name('admin.statistics');
+Route::get('/admin/reports/total', [AdminController::class, 'totalReport'])->name('admin.total');
+Route::post('/admin/reports/total', [AdminController::class, 'storeTotalReport'])->name('admin.store.total');
 
 Auth::routes();
 
