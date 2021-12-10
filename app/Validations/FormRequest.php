@@ -21,6 +21,7 @@ class FormRequest
         ]);
 
         $result['user_id'] = auth()->id();
+
         return $result;
     }
 
@@ -31,6 +32,7 @@ class FormRequest
             'description' => 'required|max:255',
             'body' => 'required'
         ]);
+
         return $result;
     }
 

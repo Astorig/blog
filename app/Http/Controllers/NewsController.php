@@ -18,6 +18,7 @@ class NewsController extends Controller
     public function index(News $news)
     {
         $news = $news->latest()->simplePaginate(10);
+
         return view('news.index', compact('news'));
     }
 
@@ -54,12 +55,14 @@ class NewsController extends Controller
         $tags = collect(explode(',', $request['tags']));
 
         $tagsSynchronizer->sync($tags, $news);
+
         return redirect()->route('admin.news');
     }
 
     public function destroy(News $news)
     {
         $news->delete();
+
         return redirect()->route('admin.news');
     }
 }

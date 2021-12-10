@@ -27,7 +27,6 @@ class ArticlesController extends Controller
         return view('articles.create');
     }
 
-
     public function store(Request $request, Article $article, FormRequest $attributes, TagsSynchronizer $tagsSynchronizer)
     {
         $tags = collect(explode(',', $request['tags']));
@@ -39,18 +38,15 @@ class ArticlesController extends Controller
         return redirect('/');
     }
 
-
     public function show(Article $article)
     {
         return view('articles.show', compact('article'));
     }
 
-
     public function edit(Article $article)
     {
         return view('articles.edit', compact('article'));
     }
-
 
     public function update(Request $request, Article $article,FormRequest $attributes, TagsSynchronizer $tagsSynchronizer)
     {
@@ -62,7 +58,6 @@ class ArticlesController extends Controller
 
         return redirect('/');
     }
-
 
     public function destroy(Article $article)
     {

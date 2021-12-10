@@ -15,15 +15,16 @@ class CountTotalReport implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    protected $request;
+    protected $requestKeys;
+
     /**
      * Create a new job instance.
      *
      * @return void
      */
-    public function __construct($request)
+    public function __construct($requestKeys)
     {
-        $this->request = $request;
+        $this->requestKeys = $requestKeys;
     }
 
     /**
@@ -34,7 +35,7 @@ class CountTotalReport implements ShouldQueue
     public function handle()
     {
         $resultRequest = [];
-        foreach ($this->request as $item) {
+        foreach ($this->requestKeys as $item) {
             switch ($item) {
                 case 'news':
                     $resultRequest['news'] = DB::table('news')->count();
@@ -51,7 +52,6 @@ class CountTotalReport implements ShouldQueue
                 case 'users':
                     $resultRequest['users'] = DB::table('users')->count();
                     break;
-
             }
         }
         Notification::route('mail', config('mail.for.address'))->notify(new MailingOfTotalReport($resultRequest));

@@ -57,6 +57,7 @@ class PortalStatistics
             ->select('name', DB::raw('count(*) as article_count'))
             ->groupBy('name')
             ->get();
+
         return $articlesActiveUsers->pluck('article_count')->avg();
     }
 
