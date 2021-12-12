@@ -6,6 +6,7 @@ use App\Models\News;
 use App\Services\TagsSynchronizer;
 use App\Validations\FormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class NewsController extends Controller
 {
@@ -15,9 +16,11 @@ class NewsController extends Controller
         $this->middleware('isadmin')->except(['index', 'show']);
     }
 
-    public function index(News $news)
+    public function index()
     {
-        $news = $news->latest()->simplePaginate(10);
+        $news = Cache::tags(['news'])->remember('users_news|' . auth()->id(), 3600, function () {
+            return News::latest()->simplePaginate(10);
+        });
 
         return view('news.index', compact('news'));
     }
@@ -40,6 +43,10 @@ class NewsController extends Controller
 
     public function show(News $news)
     {
+        $news = Cache::tags('news')->remember('news|' . $news->id, 3600, function () use ($news) {
+            return $news;
+        });
+
         return view('news.show', compact('news'));
     }
 
