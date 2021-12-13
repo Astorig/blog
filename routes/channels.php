@@ -20,3 +20,7 @@ Broadcast::channel('App.Models.User.{id}', function ($user, $id) {
 Broadcast::channel('article', function ($user) {
     return $user->isAdmin();
 });
+
+Broadcast::channel('totalReport', function ($user) {
+    return $user->isAdmin();
+});

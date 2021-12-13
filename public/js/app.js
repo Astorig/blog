@@ -54,8 +54,8 @@ window.Echo = new laravel_echo__WEBPACK_IMPORTED_MODULE_0__["default"]({
 Echo["private"]('article').listen('ArticleUpdated', function (e) {
   alert('Изменена статья: ' + e.article.title + '\n' + 'Поля, которые были изменены ' + Object.keys(JSON.parse(e.changedColumns)));
 });
-Echo["private"]('App.Models.User.1').notification(function (notification) {
-  console.log(notification.resultRequest);
+Echo["private"]('totalReport').notification(function (notification) {
+  alert(JSON.stringify(notification.resultRequest));
 });
 
 /***/ }),

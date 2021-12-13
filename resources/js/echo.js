@@ -8,7 +8,7 @@ Echo
     });
 
 Echo
-    .private('App.Models.User.1')
+    .private('totalReport')
     .notification((notification) => {
-         console.log(notification.resultRequest);
+        alert(JSON.stringify(notification.resultRequest));
 });
