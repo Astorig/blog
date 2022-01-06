@@ -69,7 +69,7 @@ class AdminController extends Controller
 
     public function storeTotalReport(Request $request)
     {
-        CountTotalReport::dispatch($request->keys())->onQueue('reports');
+        CountTotalReport::dispatch($request->keys());
 
         return redirect()->route('admin');
     }

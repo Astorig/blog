@@ -60,7 +60,6 @@ class ArticlesController extends Controller
         $tags = collect(explode(',', $request['tags']));
 
         $tagsSynchronizer->sync($tags, $article);
-
         return redirect('/');
     }
 

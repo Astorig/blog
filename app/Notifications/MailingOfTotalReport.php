@@ -2,8 +2,9 @@
 
 namespace App\Notifications;
 
+use Illuminate\Broadcasting\PrivateChannel;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
+use Illuminate\Notifications\Messages\BroadcastMessage;
 use Illuminate\Notifications\Messages\MailMessage;
 use Illuminate\Notifications\Notification;
 
@@ -30,7 +31,19 @@ class MailingOfTotalReport extends Notification
      */
     public function via($notifiable)
     {
-        return ['mail'];
+        return ['mail', 'broadcast'];
+    }
+
+    public function toBroadcast($notifiable)
+    {
+        return new BroadcastMessage([
+            'resultRequest' => $this->resultRequest
+        ]);
+    }
+
+    public function broadcastOn()
+    {
+        return new PrivateChannel('totalReport');
     }
 
     /**
