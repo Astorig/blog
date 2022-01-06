@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\ArticleDestroyed;
 use App\Notifications\ArticleChangeCompleted;
+use Illuminate\Support\Facades\Cache;
 
 class SendArticleDestroyedNotification
 {
@@ -26,5 +27,6 @@ class SendArticleDestroyedNotification
     public function handle(ArticleDestroyed $event)
     {
         $event->article->user->notify(new ArticleChangeCompleted($event->article->title, 'destroy', route('welcome')));
+        Cache::tags(['articles'])->flush();
     }
 }

@@ -4,6 +4,7 @@ namespace App\Listeners;
 
 use App\Events\ArticleCreated;
 use App\Notifications\ArticleChangeCompleted;
+use Illuminate\Support\Facades\Cache;
 
 class SendArticleCreatedNotification
 {
@@ -26,5 +27,6 @@ class SendArticleCreatedNotification
     public function handle(ArticleCreated $event)
     {
         $event->article->user->notify(new ArticleChangeCompleted($event->article->title, 'create', route('article.show', $event->article->code)));
+        Cache::tags(['articles'])->flush();
     }
 }

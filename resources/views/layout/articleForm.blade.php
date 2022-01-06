@@ -30,7 +30,7 @@
 </div>
 @admin(Auth::user()->roles)
         <div class="mb-3 form-check">
-            <input name="published" type="checkbox" class="form-check-input" id="inputPublished" value="{{ $article->isPublished() ? 0 : 1 }}">
-            <label class="form-check-label" for="inputPublished">{{ $article->isPublished() ? 'Снять с публикации' : 'Опубликовать' }}</label>
+            <input name="published" type="checkbox" class="form-check-input" id="inputPublished" value="{{ isset($article) && $article->isPublished() ? 0 : 1 }}">
+            <label class="form-check-label" for="inputPublished">{{ isset($article) && $article->isPublished() ? 'Снять с публикации' : 'Опубликовать' }}</label>
         </div>
 @endadmin
