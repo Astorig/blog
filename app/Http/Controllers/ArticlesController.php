@@ -6,6 +6,7 @@ use App\Models\Article;
 use App\Services\TagsSynchronizer;
 use App\Validations\FormRequest;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class ArticlesController extends Controller
 {
@@ -40,6 +41,10 @@ class ArticlesController extends Controller
 
     public function show(Article $article)
     {
+        $article = Cache::tags('articles')->remember('article|' . $article->code, 3600, function () use ($article) {
+           return $article;
+        });
+
         return view('articles.show', compact('article'));
     }
 

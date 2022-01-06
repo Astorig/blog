@@ -8,6 +8,7 @@ use App\Models\Contact;
 use App\Models\News;
 use App\Services\PortalStatistics;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Cache;
 
 class AdminController extends Controller
 {
@@ -43,14 +44,20 @@ class AdminController extends Controller
 
     public function news(News $news)
     {
-        $news = $news->latest()->simplePaginate(20);
+        $news = Cache::tags(['news'])->remember('users_news|' . auth()->id(), 3600, function () {
+            return News::latest()->simplePaginate(20);
+        });
 
         return view('admin.news', compact('news'));
     }
 
     public function statistics(PortalStatistics $statistics)
     {
-        $resultStatistics = $statistics->resultPortalStatistics()->toArray();
+        Cache::tags('statistics')->flush();
+
+        $resultStatistics = Cache::tags(['reports', 'statistics'])->remember('statistics_portal', 3600, function () use ($statistics) {
+            return $statistics->resultPortalStatistics()->toArray();
+        });
 
         return view('admin.reports.statistics', compact('resultStatistics'));
     }
