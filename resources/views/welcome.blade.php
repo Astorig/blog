@@ -8,6 +8,7 @@
     </div>
     @foreach($articlesIsPublished as $article)
         <div class="blog-post">
+            <div</div>
             <h2 class="blog-post-title"><a href="/articles/{{$article->code}}">{{$article->title}}</a></h2>
             <p class="blog-post-meta">{{$article->created_at->format('d.m.Y H:i:s')}}</p>
 
